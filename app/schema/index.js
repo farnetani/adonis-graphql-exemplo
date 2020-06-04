@@ -9,4 +9,8 @@ const typesArray = fileLoader(path.join(__dirname, "./types"), {
 
 const typeDefs = mergeTypes(typesArray, { all: true });
 
+const resolversArray = fileLoader(path.join(__dirname, "../resolvers"), {
+  recursive: true
+});
+
 module.exports = makeExecutableSchema({ typeDefs, resolvers });

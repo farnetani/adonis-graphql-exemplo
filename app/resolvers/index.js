@@ -1,37 +1,26 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Post = use('App/Models/Post')
+
 const slugify = require('slugify')
+
+const userResolver = use('App/resolvers/user')
+const postResolver = use('App/resolvers/post')
 
 // Define resolvers
 const resolvers = {
   Query: {
-    // Fetch all users
-    async allUsers() {
-      const users = await User.all()
-      return users.toJSON()
-    },
-    // Get a user by its ID
-    async fetchUser(_,{ id }) {
-      const user = await User.find(id)
-      return user.toJSON()
-    },
-    
+    ...userResolver.Consultas,
+    ...postResolver.Consultas
   },
 
   Mutation: {
-    // Handles user login
-    async login(_, { email, password }, { auth }) {
-      const { token } = await auth.attempt(email, password)
-      return token
-    },
-  
-    // Create new user
-    async createUser(_, { username, email, password }) {
-      return await User.create({ username, email, password })
-    },
-  
+    ...userResolver.Funcoes,
+    ...postResolver.Funcoes
   },
+  User: {...userResolver.UserSchema}, // Para pegar o relacionamento
+  Post: {...postResolver.PostSchema} // para pegar o relacionamento
 }
 
 module.exports = resolvers

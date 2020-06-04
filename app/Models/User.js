@@ -35,8 +35,10 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-
-
+  // Precisa criar o relacionamento para evitar erro do tipo User.posts not....
+  posts () {
+    return this.hasMany('App/Models/Post')
+  }
 
 }
 

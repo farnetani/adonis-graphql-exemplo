@@ -1,0 +1,14 @@
+type Post {
+  id: Int!
+  title: String!
+  slug: String!
+  content: String!
+  user: User!
+}
+#type Query {
+#  allPosts: [Post]
+#  fetchPost(id: Int!): Post
+#}
+#type Mutation {
+#  addPost (title: String!, content: String!): Post
+#}
